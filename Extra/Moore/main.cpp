@@ -3,28 +3,29 @@
 #define INF 1000
 using namespace std;
 ifstream in("../graf.txt");
-void Moore(int nodStart, int nrNoduri, int matAd[100][100], int l[])
+void Moore(int nod, int n, int a[100][100], int l[])
 {
-    int Q[100], st = 1, dr = 1;
-
-    l[nodStart] = 0;
-    Q[st] = nodStart;
-
-    for (int i = 1; i <= nrNoduri; i++)
-        if (i != nodStart)
+    int q[100],st,dr,k;
+    st=dr=1;
+    q[st] = nod;
+    l[nod] = 0;
+    for(int i = 1;i<=n;i++){
+        if(i != nod){
             l[i] = INF;
+        }
 
-    while (st <= dr)
-    {
-        int x = Q[st];
-        for (int y = 1; y <= nrNoduri; y++)
-            if (matAd[x][y] == 1 && l[y] == INF)
-            {
-                l[y] = l[x] + 1;
-                Q[++dr] = y;
+    }
+    while(st<=dr){
+        k = q[st];
+        for(int i = 1; i<=n;i++){
+            if(l[i] == INF && a[k][i]){
+                l[i] = l[k]+1;
+                q[++dr] = i;
             }
+        }
         st++;
     }
+
 }
 void citesteGraf(int &nrNoduri, int &nodStart, int matAd[100][100])
 {
